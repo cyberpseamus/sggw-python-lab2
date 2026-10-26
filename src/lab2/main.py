@@ -35,15 +35,17 @@ class FileWriter:
 def main():
     print("Początek logowania")
 
-    with Logger():
-        print("Logowane działanie")
-        with FileWriter("wynik.txt") as file:
-            file.write("Linia tekstu")
+    try:
+        with Logger():
+            print("Logowane działanie")
+            with FileWriter("wynik.txt") as file:
+                file.write("Linia tekstu")
+            raise ValueError("błąd")
 
-    print(f"Czy plik jest zamkniety: {file.closed}")
+        print("Koniec logowania")
 
-    print("Koniec logowania")
-
+    except ValueError:
+        print(f"Czy plik jest zamkniety: {file.closed}")
 
 if __name__ == "__main__":
     main()
