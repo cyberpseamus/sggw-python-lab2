@@ -30,6 +30,7 @@ class FileWriter:
         return self.file
 
     def __exit__(self, exc_type, exc, tb):
+        print(f"Błąd podczas zapisu: {exc}")
         self.file.close()
 
 def main():
@@ -40,7 +41,7 @@ def main():
             print("Logowane działanie")
             with FileWriter("wynik.txt") as file:
                 file.write("Linia tekstu")
-            raise ValueError("błąd")
+                raise ValueError("Treść wyjątku")
 
         print("Koniec logowania")
 
